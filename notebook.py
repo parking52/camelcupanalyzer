@@ -11,13 +11,19 @@ board = Board(20)
 print(board.board)
 print("----------------------------------------------")
 
-board.board_init()
+# board.board_init()
+board.board_init(config=True)
 print(board.board)
 print("----------------------------------------------")
 
-board.play_camel(3)
+# board.play_camel(3)
+
+board.loop_until_end()
+
 print(board.board)
 print("----------------------------------------------")
+
+
 
 print(board.camel_list)
 print(board.compute_prob_for_each_camel())
