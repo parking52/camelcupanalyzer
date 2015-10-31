@@ -12,8 +12,8 @@ class Board():
         self.board = numpy.zeros(shape=(n, 5))
         self.camel_list = [Camel(1), Camel(2), Camel(3), Camel(4), Camel(5)]
 
-        for camel in self.camel_list:
-            self.add_camel_on_top_of_case_n(camel, 0)
+        # for camel in self.camel_list:
+        #     self.add_camel_on_top_of_case_n(camel, 0)
 
 
     def play_camel(self, n):
@@ -57,7 +57,16 @@ class Board():
         self.board[n][0] = camel.camel_numero
 
 
+    def board_init(self, config=None):
 
+        if config == None:
+
+            random.shuffle(self.camel_list)
+
+            for camel in self.camel_list:
+                dice = random.randint(1, 3) - 1 ## can start at 0
+                self.add_camel_on_top_of_case_n(camel, dice)
+                camel.position += dice
 
 
 
