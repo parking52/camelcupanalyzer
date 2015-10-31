@@ -37,10 +37,16 @@ class Board():
         return result_array
 
     def remove_camel_n_from_position(self, camel, n):
+
         tile_state = self.board[n]
         index = numpy.where(tile_state == camel.camel_numero)[0]
+        self.board[n][index] = 0
+        index += 1
 
-        while index <= 5:
+        while index < 5:
+            self.board[n][index - 1] = self.board[n][index]
+            self.board[n][index] = 0
+            index += 1
 
 
     def add_camel_on_top_of_case_n(self, camel, n):
