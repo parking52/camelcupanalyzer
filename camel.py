@@ -8,8 +8,8 @@ import numpy
 class Camel():
 
     def __init__(self, numero):
+
         self.camel_numero = numero
         self.position = 0
-        self.position_on_tile = 0
 
 

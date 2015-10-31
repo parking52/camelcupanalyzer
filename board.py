@@ -12,6 +12,8 @@ class Board():
         self.board = numpy.zeros(shape=(n, 5))
         self.camel_list = [Camel(1), Camel(2), Camel(3), Camel(4), Camel(5)]
 
+        self.winner = None
+
         # for camel in self.camel_list:
         #     self.add_camel_on_top_of_case_n(camel, 0)
 
@@ -69,25 +71,37 @@ class Board():
                 camel.position += dice
 
         else:
-            starting_places = [[1, 3], [2, 3], [0, 2], [2, 1], [4, 2]]
+            starting_places = [[4, 1], [2, 1], [0, 1], [3, 1], [1, 1]]
             for starting_place in starting_places:
                 # self.camel_list[starting_place[0]].position = starting_place[1]
                 self.add_camel_on_top_of_case_n(self.camel_list[starting_place[0]], starting_place[1])
+                self.camel_list[starting_place[0]].position = starting_place[1]
 
 
 
     def loop_until_end(self):
 
+        turn = 1
         while self.no_position_over_16():
-            pass
+            random.shuffle(self.camel_list)
+            for camel in self.camel_list:
+                if self.no_position_over_16():
+                    # print("playing camel " + str(camel.camel_numero))
+                    self.play_camel(camel.camel_numero)
+
+            # print("turn " + str(turn) + " is done")
+            turn += 1
+
+        return self.winner
+
 
     def no_position_over_16(self):
         for camel in self.camel_list:
             if camel.position >= 16:
-                return camel.position
+                self.winner = camel.camel_numero
+                return False
 
-
-        return false
+        return True
 
 
 
